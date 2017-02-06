@@ -9,6 +9,7 @@ import seedu.addressbook.parser.Parser;
 import seedu.addressbook.storage.StorageFile;
 import seedu.addressbook.ui.TextUi;
 
+import java.io.FileNotFoundException;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
@@ -67,6 +68,9 @@ public class Main {
              * =======================================================================================================
              */
             throw new RuntimeException(e);
+        } catch (FileNotFoundException e) {
+            ui.showToUser(e.getMessage());
+            throw new RuntimeException(e);
         }
     }
 
@@ -109,10 +113,15 @@ public class Main {
             CommandResult result = command.execute();
             storage.save(addressBook);
             return result;
-        } catch (Exception e) {
+        } catch (FileNotFoundException fnfe){
+            ui.showToUser(fnfe.getMessage());
+            System.exit(0);
+        }
+        catch (Exception e) {
             ui.showToUser(e.getMessage());
             throw new RuntimeException(e);
         }
+        return null;
     }
 
     /**
