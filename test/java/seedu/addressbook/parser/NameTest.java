@@ -26,5 +26,9 @@ public class NameTest {
         //case insensitive 
         assertTrue(nameUnderTest.isSimilar(new Name("lI hEnG")));
         assertTrue(nameUnderTest.isSimilar(new Name("li HENg")));
+        
+        assertTrue(nameUnderTest.isSimilar(new Name("hEnG lI")));
+        assertTrue(nameUnderTest.isSimilar(new Name("HENg li")));
+        assertFalse(nameUnderTest.isSimilar(new Name("HENgg lii")));
     }
 }

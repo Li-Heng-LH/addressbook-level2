@@ -75,6 +75,16 @@ public class Name {
              return true;
          }
          
+         //check for similar names with 2 fields
+         if (thisNameUnderTest.split(" ").length==2){
+             if (otherNameUnderTest.split(" ").length==2){
+                 if (thisNameUnderTest.split(" ")[0].equals(otherNameUnderTest.split(" ")[1]) 
+                         && thisNameUnderTest.split(" ")[1].equals(otherNameUnderTest.split(" ")[0])){
+                     return true;
+                 }
+             }
+         }
+         
          return false;
      }
 
