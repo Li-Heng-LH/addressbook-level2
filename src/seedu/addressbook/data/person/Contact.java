@@ -1,5 +1,7 @@
 package seedu.addressbook.data.person;
 
+import seedu.addressbook.data.exception.IllegalValueException;
+
 /**
  * Represents a Person's contacts in the address book.
  */
@@ -7,6 +9,10 @@ public class Contact {
     
     public String value;
     protected boolean isPrivate;
+    
+    public Contact (boolean isPrivate) {
+        this.isPrivate = isPrivate;
+    }
     
     @Override
     public String toString() {
