@@ -10,14 +10,7 @@ import org.junit.Test;
 
 public class UtilsTest {
     @Test
-    public void isAnyNull() {
-        // empty list
-        assertFalse(Utils.isAnyNull());
-
-        // Any non-empty list
-        assertFalse(Utils.isAnyNull(new Object(), new Object()));
-        assertFalse(Utils.isAnyNull("test"));
-        assertFalse(Utils.isAnyNull(""));
+    public void isAnyNull_null_true() {
 
         // non empty list with just one null at the beginning
         assertTrue(Utils.isAnyNull((Object) null));
@@ -32,12 +25,24 @@ public class UtilsTest {
         assertTrue(Utils.isAnyNull("", new Object(), null));
         assertTrue(Utils.isAnyNull(new Object(), new Object(), null));
 
+        //my own tests
+        assertTrue(Utils.isAnyNull("a",null,"b"));
+    }
+    
+    @Test
+    public void isAnyNull_null_false() {
+        // empty list
+        assertFalse(Utils.isAnyNull());
+
+        // Any non-empty list
+        assertFalse(Utils.isAnyNull(new Object(), new Object()));
+        assertFalse(Utils.isAnyNull("test"));
+        assertFalse(Utils.isAnyNull(""));
+
         // confirms nulls inside the list are not considered
         List<Object> nullList = Arrays.asList((Object) null);
         assertFalse(Utils.isAnyNull(nullList));
-        
-        //my own tests
-        assertTrue(Utils.isAnyNull("a",null,"b"));
+
         assertFalse(Utils.isAnyNull("a","b","c"));
     }
 
@@ -56,6 +61,12 @@ public class UtilsTest {
         assertAreUnique("abc", "ab", "a");
         assertAreUnique(1, 2);
 
+        //My own tests
+        assertAreUnique(null, "a", "b", 1, 2);
+    }
+
+    @Test
+    public void elementsAreNotUnique() throws Exception {
         // some identical objects
         assertNotUnique("abc", "abc");
         assertNotUnique("abc", "", "abc", "ABC");
@@ -64,9 +75,6 @@ public class UtilsTest {
         assertNotUnique(null, 1, new Integer(1));
         assertNotUnique(null, null);
         assertNotUnique(null, "a", "b", null);
-        
-        //My own tests
-        assertAreUnique(null, "a", "b", 1, 2);
         assertNotUnique(null, "a", "b", 1, 1);
     }
 
